@@ -1,0 +1,5 @@
+export const ALL_CATEGORIES = "ALL_CATEGORIES";
+export const CREATE_CATEGORY = "CREATE_CATEGORY";
+export const ALL_BRANDS = "ALL_BRANDS";
+export const CREATE_BRANDS = "CREATE_BRANDS";
+export const GET_ERROR = "GET_ERROR";
