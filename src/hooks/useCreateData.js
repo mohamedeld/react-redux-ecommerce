@@ -9,3 +9,12 @@ export async function useCreateData(url,data){
   console.log(response)
   return response
 } 
+
+export async function useCreateDataWithoutImage(url,data){
+  const response = await baseURL.post(url,data,{
+    headers:{
+      'Content-Type':'application/json'
+    }
+  })
+  return response;
+}

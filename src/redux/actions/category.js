@@ -1,13 +1,13 @@
 
-import { useCreateData } from "../../hooks/useCreateData";
+import { useCreateData, useCreateDataWithoutImage } from "../../hooks/useCreateData";
 import { useGetData } from "../../hooks/useGetData";
-import { ALL_CATEGORIES, CREATE_CATEGORY, GET_ERROR } from "../type";
+import { ALL_CATEGORIES, CREATE_CATEGORY, CREATE_SUBCATEGORYBYCATEGORY, GET_ERROR, GET_SUBCATEGORYBYCATEGORY } from "../type";
 export const  allCategories = (limit)=> async (dispatch)=>{
   try{
     const categories = await useGetData(`/api/v1/categories?limit=${limit}`);
     dispatch({
       type:ALL_CATEGORIES,
-      payload:categories.data
+      payload:categories
     })
   }catch(err){
     dispatch({
@@ -48,3 +48,4 @@ export const  createCategory = (data)=> async (dispatch)=>{
 
   }
 }
+

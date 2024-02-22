@@ -14,7 +14,7 @@ const HomeCategory = () => {
     <Container>
       <SubTiltle title="التصنيفات" btntitle="المزيد" pathText="/allcategory" />
       <Row className='my-2 d-flex justify-content-between'>
-        {isLoading === false && responseData.data ? responseData.data.slice(0,5).map(res=>{
+        {isLoading === false && responseData.data ? responseData.data.data.slice(0,5).map(res=>{
           return (
             <CategoryCard key={res._id} title={res.name} img={res.image} background={colors[randomNum]} />
           )

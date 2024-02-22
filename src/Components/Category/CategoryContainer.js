@@ -10,7 +10,7 @@ const CategoryContainer = ({responseData,isLoading}) => {
       <div className="admin-content-text mt-2 ">كل التصنيفات</div>
       <Row className='my-2 d-flex justify-content-between'>
         {isLoading === false && responseData.data ?
-          responseData.data.map(res => {
+          responseData.data.data.map(res => {
             return (
               <CategoryCard key={res._id} title={res.name} img={res.image} background={colors[randomNum]} />
             )

@@ -9,6 +9,7 @@ export function useCreateCategory(){
   const [selectedImage,setSelectedImage] = useState(); 
   const [isLoading,setIsLoading] = useState(true); 
   const [isPress,setIsPress] = useState(false);
+  
   const dispatch = useDispatch();
   const res = useSelector(state=> state.allCategories.categories);
   useEffect(()=>{
@@ -20,14 +21,12 @@ export function useCreateCategory(){
       setIsPress(false);
       if(res){
         toast.success("item added successfully")
-        
       }else{
         toast.error("something went wrong");
       }
     }
   },[isLoading])
-
- 
+  
   function changeImage(event){
     if(event.target.files && event.target.files[0]){
       setImg(URL.createObjectURL(event.target.files[0]));
