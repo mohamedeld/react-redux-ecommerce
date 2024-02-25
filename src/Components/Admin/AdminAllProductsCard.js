@@ -1,10 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col,Card,Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import prod1 from '../../images/prod1.png'
-const AdminAllProductsCard = () => {
+import useModal from '../../utils/useModal'
+import Modals from '../../utils/Modals'
+import { useDispatch } from 'react-redux'
+import { deleteProductById } from '../../redux/actions/product'
+import { ToastContainer, toast } from 'react-toastify'
+const AdminAllProductsCard = ({image,rating,id,title,price}) => {
+  const dispatch = useDispatch();
+  const [isDeleted,setIsDeleted] = useState(false);
+  const [show,handleClose,handleShow] = useModal();
+  
+    async function handleDelete(){
+      setIsDeleted(false);
+      await dispatch(deleteProductById(id));
+      setIsDeleted(true);
+      handleClose();
+    }
+    useEffect(()=>{
+      if(isDeleted){
+        toast.success("item deleted successfully");
+      }else{
+        toast.error("something went wrong");
+      }
+    },[isDeleted])
     return (
+      <>
+      <Modals handleDelete={handleDelete} show={show} handleClose={handleClose}/> 
+      
         <Col xs="12" sm="6" md="5" lg="4" className="d-flex">
+          <ToastContainer/>
             <Card
                 className="my-2"
                 style={{
@@ -16,24 +42,24 @@ const AdminAllProductsCard = () => {
                 }}>
                 <Row className="d-flex justify-content-center px-2">
                     <Col className=" d-flex justify-content-between">
-                        <div className="d-inline item-delete-edit">ازاله</div>
+                        <div className="d-inline item-delete-edit" onClick={handleShow}>ازاله</div>
                         <div className="d-inline item-delete-edit">تعديل</div>
                     </Col>
                 </Row>
-                <Link to="/products/:id" style={{ textDecoration: "none" }}>
-                    <Card.Img style={{ height: "228px", width: "100%" }} src={prod1} />
+                <Link to={`/products/${id}`} style={{ textDecoration: "none" }}>
+                    <Card.Img style={{ height: "228px", width: "100%" }} src={image} />
                     <Card.Body>
                         <Card.Title>
                             <div className="card-title">
-                                سود كربون ساعة يد ذكية بيب إس أسود كربون{" "}
+                                {title}{" "}
                             </div>
                         </Card.Title>
                         <Card.Text>
                             <div className="d-flex justify-content-between">
-                                <div className="card-rate">4.5</div>
+                                <div className="card-rate">{rating}</div>
                                 <div className="d-flex">
                                     <div className="card-currency mx-1">جنيه</div>
-                                    <div className="card-price">880</div>
+                                    <div className="card-price">{price}</div>
                                 </div>
                             </div>
                         </Card.Text>
@@ -41,6 +67,7 @@ const AdminAllProductsCard = () => {
                 </Link>
             </Card>
         </Col>
+        </>
     )
 }
 

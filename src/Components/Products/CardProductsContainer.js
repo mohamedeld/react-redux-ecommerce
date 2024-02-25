@@ -3,7 +3,7 @@ import { Container,Row,Spinner } from 'react-bootstrap'
 import SubTiltle from '../Uitily/SubTiltle'
 import ProductCard from './ProductCard'
 
-const CardProductsContainer = ({title ,btntitle,pathText,response}) => {
+const CardProductsContainer = ({title ,btntitle,pathText,response,productsLike}) => {
   
     return (
         <Container>

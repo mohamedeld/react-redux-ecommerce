@@ -15,7 +15,7 @@ export function useGetProducts(){
     pageCount = response.pagingationResult.numberOfPages
   }
   function getPage(page){
-    dispatch(getProductByPage(page));
+    dispatch(getProductByPage(page,6));
   }
   return [response,pageCount,getPage];
 }
