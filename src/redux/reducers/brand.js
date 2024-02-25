@@ -1,7 +1,8 @@
-import { ALL_BRANDS, GET_ERROR } from "../type";
+import { ALL_BRANDS, GET_BRAND_BY_ID, GET_ERROR } from "../type";
 
 const initialState = {
-  brands:[]
+  brands:[],
+  brand:[]
 }
 
 export function brandReducer(state=initialState,action){
@@ -10,6 +11,11 @@ export function brandReducer(state=initialState,action){
       return {
         ...state,
         brands:action.payload
+      }
+    case GET_BRAND_BY_ID:
+      return{
+        ...state,
+        brand:action.payload
       }
     case GET_ERROR:
       return{

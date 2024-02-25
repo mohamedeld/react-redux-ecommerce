@@ -6,6 +6,8 @@ import ProductDetalis from '../../Components/Products/ProductDetalis'
 import RateContainer from '../../Components/Rate/RateContainer'
 
 const ProductDetalisPage = () => {
+  
+
     return (
         <div style={{ minHeight: '670px' }}>
             <CategoryHeader />

@@ -11,9 +11,9 @@ const CardProductsContainer = ({title ,btntitle,pathText,response}) => {
             <Row className='my-2 d-flex justify-content-between'>
                {
                 response && response.data ? (
-                  response.data.data.map(res=>{
+                  response.data.data.slice(0,4).map(res=>{
                     return (
-                      <ProductCard productName={res.title} productPrice={res.price} key={res._id}/>
+                      <ProductCard productName={res.title} productPrice={res.price} key={res._id} productImgCover={res.imageCover} rating={res.ratingsQuantity} id={res._id}/>
                     )
                   })
                 ):<Spinner variant="primary"animation="border" />

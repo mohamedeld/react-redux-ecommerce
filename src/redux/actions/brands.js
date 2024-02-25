@@ -1,6 +1,6 @@
 import { useCreateData } from "../../hooks/useCreateData";
 import { useGetData } from "../../hooks/useGetData"
-import { ALL_BRANDS, GET_ERROR } from "../type";
+import { ALL_BRANDS, GET_BRAND_BY_ID, GET_ERROR } from "../type";
 
 
 export const getBrands = (limit) => async (dispatch)=>{
@@ -39,6 +39,21 @@ export const createNewBrand = (formData) => async (dispatch)=>{
     dispatch({
       type:ALL_BRANDS,
       payload:brands
+    })
+  }catch(err){
+    dispatch({
+      type:GET_ERROR,
+      payload:"Error "+err
+    })
+  }
+
+}
+export const getBrandById = (id) => async (dispatch)=>{
+  try{
+    const response = await useGetData(`/api/v1/brands/${id}`);
+    dispatch({
+      type:GET_BRAND_BY_ID,
+      payload:response
     })
   }catch(err){
     dispatch({
