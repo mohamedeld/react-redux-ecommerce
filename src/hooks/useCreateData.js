@@ -6,7 +6,6 @@ export async function useCreateData(url,data){
       'Content-Type':'multipart/form-data'
     }
   });
-  console.log(response)
   return response
 } 
 

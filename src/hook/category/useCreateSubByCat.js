@@ -41,6 +41,10 @@ export default function useCreateSubByCat() {
   }
   async function handleSubmit(event){
     event.preventDefault();
+    if(!navigator.onLine){
+      toast.warn("your are offline");
+      return;
+    }
     if(name ==="" || name.length <3 || catId ===  '0'){
       toast.warn("Please enter your data");
       return;

@@ -1,4 +1,4 @@
-import { CREATE_SUBCATEGORY, GET_ERROR, GET_SUBCATEGORY } from "../type";
+import { CREATE_SUBCATEGORY, GET_ERROR, GET_SUBCATEGORY, GET_SUBCATEGORYBYCATEGORY } from "../type";
 
 const initialState={
   subCategory:[]
@@ -17,6 +17,11 @@ export function subCategoryReducer(state=initialState,action){
         ...state,
         subCategory:action.payload
       }
+      case GET_SUBCATEGORYBYCATEGORY:
+        return {
+          ...state,
+          subCategory:action.payload
+        }
     case GET_ERROR:
       return{
         subCategory:action.payload

@@ -1,6 +1,6 @@
 import { useCreateDataWithoutImage } from "../../hooks/useCreateData";
 import { useGetData } from "../../hooks/useGetData";
-import { CREATE_SUBCATEGORY, GET_ERROR, GET_SUBCATEGORY } from "../type";
+import { CREATE_SUBCATEGORY, GET_ERROR, GET_SUBCATEGORY, GET_SUBCATEGORYBYCATEGORY } from "../type";
 
 
 export const getSubCategory = ()=> async(dispatch) =>{
@@ -28,6 +28,21 @@ export const createSubCategory = (data)=> async(dispatch) =>{
     dispatch({
       type:GET_ERROR,
       payload:"Error "+ err
+    })
+  }
+}
+
+export const getSubCatByCategory = (catId) => async (dispatch)=>{
+  try{
+    const response = await useGetData(`/api/v1/categories/${catId}/subcategories`);
+    dispatch({
+      type:GET_SUBCATEGORYBYCATEGORY,
+      payload:response
+    })
+  }catch(err){
+    dispatch({
+      type:GET_ERROR,
+      payload:"Error "+err
     })
   }
 }

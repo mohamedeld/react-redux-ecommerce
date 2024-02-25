@@ -1,4 +1,4 @@
-import { ALL_CATEGORIES, CREATE_CATEGORY, GET_ERROR } from "../type";
+import { ALL_CATEGORIES, CREATE_CATEGORY, GET_ERROR, GET_SUBCATEGORYBYCATEGORY } from "../type";
 
 const initialState = {
   categories:[],
@@ -19,6 +19,7 @@ export default function allCategories(state=initialState,action){
         categories:action.payload,
         loading:false
       }
+    
     case GET_ERROR:
       return {
         loading:true,

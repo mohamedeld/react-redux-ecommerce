@@ -6,15 +6,17 @@ import Silder from './../../Components/Home/Silder';
 import DiscountSection from './../../Components/Home/DiscountSection';
 import BrandFeatured from '../../Components/Brand/BrandFeatured';
 import Footer from '../../Components/Uitily/Footer';
+import { useGetProducts } from '../../hook/product/useGetProduct';
 const HomePage = () => {
+  const [response ] = useGetProducts();
     return (
         <div className='font' style={{ minHeight: '670px' }}>
 
             <Silder />
             <HomeCategory />
-            <CardProductsContainer title="الاكثر مبيعا" btntitle="المزيد" pathText="/products" />
+            <CardProductsContainer title="الاكثر مبيعا" btntitle="المزيد" pathText="/products" response = {response}/>
             <DiscountSection />
-            <CardProductsContainer title="احدث الازياء" btntitle="المزيد" pathText="/products" />
+            <CardProductsContainer title="احدث الازياء" btntitle="المزيد" pathText="/products" response = {response}/>
             <BrandFeatured title="اشهر الماركات" btntitle="المزيد"  />
 
         </div>

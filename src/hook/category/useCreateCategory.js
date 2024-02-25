@@ -50,6 +50,7 @@ export function useCreateCategory(){
     await dispatch(createCategory(formData));
     
     setIsLoading(false);
+    console.log(formData)
   }
 
   return [img,name,changeImage,changeName,handleSubmit,isPress,isLoading];
