@@ -24,6 +24,7 @@ import UserAddAddressPage from './Page/User/UserAddAddressPage';
 import UserEditAddressPage from './Page/User/UserEditAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
 import NotFound from "./utils/NotFound";
+import AdminEditProductPage from "./Page/Admin/AdminEditProductPage";
 function App() {
   return (
     <div className="font" >
@@ -52,6 +53,7 @@ function App() {
           <Route path="/user/add-address" element={<UserAddAddressPage />} />
           <Route path="/user/edit-address" element={<UserEditAddressPage />} />  
           <Route path="/user/profile" element={<UserProfilePage />} />  
+          <Route path="/admin/editproduct/:id" element={<AdminEditProductPage />} />  
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </BrowserRouter>

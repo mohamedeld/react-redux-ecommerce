@@ -1,7 +1,8 @@
 import { useCreateData } from "../../hooks/useCreateData"
 import { useDeleteData } from "../../hooks/useDeleteData";
+import { useEditData } from "../../hooks/useEditData";
 import { useGetData } from "../../hooks/useGetData";
-import { CREATE_PRODUCT, DELETE_PRODUCT_BY_ID, GET_ERROR, GET_PRODUCTS, GET_PRODUCTS_BY_ID, GET_PRODUCT_BY_CATEGORY } from "../type";
+import { CREATE_PRODUCT, DELETE_PRODUCT_BY_ID, GET_ERROR, GET_PRODUCTS, GET_PRODUCTS_BY_ID, GET_PRODUCT_BY_CATEGORY, UPDATE_PRODUCT_BY_ID } from "../type";
 
 export const createProduct = (formData)=> async (dispatch)=>{
   try{
@@ -66,6 +67,20 @@ export const deleteProductById = (id)=> async(dispatch)=>{
     const response = await useDeleteData(`/api/v1/products/${id}`);
     dispatch({
       type:DELETE_PRODUCT_BY_ID,
+      payload:response
+    })
+  }catch(err){
+    dispatch({
+      type:GET_ERROR,
+      payload:"Error "+err
+    })
+  }
+}
+export const editProductById = (id,data)=> async(dispatch)=>{
+  try{
+    const response = await useEditData(`/api/v1/products/${id}`,data);
+    dispatch({
+      type:UPDATE_PRODUCT_BY_ID,
       payload:response
     })
   }catch(err){

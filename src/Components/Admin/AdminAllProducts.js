@@ -3,16 +3,16 @@ import { Row, Spinner } from 'react-bootstrap'
 import AdminAllProductsCard from './AdminAllProductsCard'
 import { useGetProducts } from '../../hook/product/useGetProduct'
 
-const AdminAllProducts = ({response}) => {
+const AdminAllProducts = ({response,isLoading}) => {
   
     return (
         <div>
             <div className='admin-content-text'>ادارة جميع المنتجات</div>
             <Row className='justify-content-start'>
                 {
-                  response && response.data ? response.data.data.map(prod=>{
+                  isLoading ===false && response && response.data ? response.data.data.map(prod=>{
                     return (
-                      <AdminAllProductsCard id={prod._id} key={prod._id} image={prod.imageCover} title={prod.title} rating={prod.ratingsQuantity} price={prod.price}/>
+                      <AdminAllProductsCard id={prod._id} key={prod._id} image={prod.imageCover} title={prod.title} rating={prod.ratingsQuantity} price={prod.price} />
                     )
                   }) : <h4>There are no items</h4>
                 }

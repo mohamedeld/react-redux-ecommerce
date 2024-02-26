@@ -1,9 +1,10 @@
-import { CREATE_PRODUCT, DELETE_PRODUCT_BY_ID, GET_ERROR, GET_PRODUCTS, GET_PRODUCTS_BY_ID, GET_PRODUCT_BY_CATEGORY } from "../type";
+import { CREATE_PRODUCT, DELETE_PRODUCT_BY_ID, GET_ERROR, GET_PRODUCTS, GET_PRODUCTS_BY_ID, GET_PRODUCT_BY_CATEGORY, UPDATE_PRODUCT_BY_ID } from "../type";
 
 const initialState = {
   products: [],
   oneProduct:[],
   similiarProducts:[],
+  updateProducts:[],
   loading:true
 }
 export function productReducer(state = initialState, action) {
@@ -36,6 +37,12 @@ export function productReducer(state = initialState, action) {
       return {
         ...state,
         products:action.payload,
+        loading:false
+      }
+    case UPDATE_PRODUCT_BY_ID:
+      return {
+        ...state,
+        updateProducts:action.payload,
         loading:false
       }
     case GET_ERROR:
