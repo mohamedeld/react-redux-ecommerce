@@ -1,30 +1,43 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProduct, getProductByPage } from "../../redux/actions/product";
+import { getProduct, getProductByPage, getProductByQueryString } from "../../redux/actions/product";
 
 export function useGetProducts(){
   const dispatch = useDispatch();
   const [isLoading,setIsLoading] = useState(true);
-  useEffect(()=>{
+  
+  let limit=4;
+  async function handleProd() {
+    let word="";
+    if(localStorage.getItem("word") !== null){
+      word = localStorage.getItem("word");
+    }
     setIsLoading(true);
-    dispatch(getProduct());
+    await dispatch(getProductByQueryString(`limit=${limit}&keyword=${word}`));
     setIsLoading(false);
+  }
+  useEffect(()=>{
+    handleProd();
   },[]);
 
   const response = useSelector(state=> state.allProducts.products);
   let pageCount = 0;
   async function getPage(page){
-   await dispatch(getProductByPage(page,6));
+    let word="";
+    if(localStorage.getItem("word") !== null){
+      word = localStorage.getItem("word");
+    }
+   await dispatch(getProductByQueryString(`limit=${limit}&page=${page}&keyword=${word}`));
   }
   try{
-    if(response && response.pagingationResult){
-      pageCount = response.pagingationResult.numberOfPages
+    if(isLoading === false && response && response.data.paginationResult){
+      pageCount = response.data.paginationResult.numberOfPages
     }
     
   }catch(err){
     console.log(err.message);
   }
   
-  return [response,pageCount,getPage,isLoading];
+  return [response,pageCount,getPage,isLoading,handleProd];
 }
 

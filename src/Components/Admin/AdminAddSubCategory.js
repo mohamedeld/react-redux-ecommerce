@@ -4,7 +4,7 @@ import useCreateSubByCat from '../../hook/category/useCreateSubByCat';
 import { ToastContainer } from 'react-toastify';
 
 const AdminAddSubCategory = () => {
-  const [isLoading,response,name,catId,handleName,handleCategoryId,handleSubmit]  = useCreateSubByCat();
+  const [isLoading,response,name,catId,handleName,handleCategoryId,handleSubmit,loading]  = useCreateSubByCat();
   
     return (
         <div>
@@ -23,7 +23,7 @@ const AdminAddSubCategory = () => {
                     <select name="category" id="lang" className="select mt-3 px-2 " onChange={handleCategoryId} >
                         <option value="0">اختر التصنيف الرئيسي</option>
                         {
-                          response.data ? 
+                        loading === false &&  response.data ? 
                           response.data.data.map(res=>{
                               return (
                                 <option key={res._id} value={res._id}>{res.name}</option>

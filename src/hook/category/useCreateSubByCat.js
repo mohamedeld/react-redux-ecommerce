@@ -10,9 +10,15 @@ export default function useCreateSubByCat() {
   const [name,setName] = useState('');
   const [isLoading,setIsLoading] = useState(true);
   const [catId,setCatId] = useState('0');
- 
+  const [loading,setLoading] = useState(true);
+  async function getCategories(){
+    setLoading(true);
+    await dispatch(allCategories());
+    setLoading(false);
+  }
+
   useEffect(()=>{
-    dispatch(allCategories());
+    getCategories();
   },[]);
  
   const response = useSelector(state=> state.allCategories.categories);
@@ -57,5 +63,5 @@ export default function useCreateSubByCat() {
     setIsLoading(false);
   }
 
-  return [isLoading,response,name,catId,handleName,handleCategoryId,handleSubmit];
+  return [isLoading,response,name,catId,handleName,handleCategoryId,handleSubmit,loading];
 }

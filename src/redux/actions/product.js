@@ -48,6 +48,20 @@ export const getProductByPage = (page,limit) => async(dispatch)=>{
     })
   }
 }
+export const getProductByQueryString = (queryString) => async(dispatch)=>{
+  try{
+    const products = await useGetData(`/api/v1/products?${queryString}`);
+    dispatch({
+      type:GET_PRODUCTS,
+      payload:products
+    })
+  }catch(err){
+    dispatch({
+      type:GET_ERROR,
+      payload:"Error "+err
+    })
+  }
+}
 export const getProductById = (id)=> async(dispatch)=>{
   try{
     const response = await useGetData(`/api/v1/products/${id}`);

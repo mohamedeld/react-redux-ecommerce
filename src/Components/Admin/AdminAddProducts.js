@@ -8,7 +8,7 @@ import { useCreateProduct } from '../../hook/product/useCreateProduct';
 import { CompactPicker } from 'react-color';
 import { ToastContainer } from 'react-toastify';
 const AdminAddProducts = () => {
-  const [images,setImages,name,handleName,description,handleDescription,priceBefore,handlePriceBefore,priceAfter,handlePriceAfter,category,handleCategory,brand,handleBrand,colors,handleColors,quantity,handleQuantity,allCats,allBrand,isActive,handleIsActive,removeColors,options,onSelect,onRemove,handleSubmit] = useCreateProduct();
+  const [images,setImages,name,handleName,description,handleDescription,priceBefore,handlePriceBefore,priceAfter,handlePriceAfter,category,handleCategory,brand,handleBrand,colors,handleColors,quantity,handleQuantity,allCats,allBrand,isActive,handleIsActive,removeColors,options,onSelect,onRemove,handleSubmit,loading,loadOption,loadSub] = useCreateProduct();
   const crop = {
     unit: '%',
     aspect: 4 / 3,
@@ -75,7 +75,7 @@ const AdminAddProducts = () => {
                         className="select input-form-area mt-3 px-2 ">
                         <option value="0">التصنيف الرئيسي</option>
                         {
-                          allCats && allCats.data ? allCats.data.data.map(cat=>{
+                         loading ===false&& allCats && allCats.data ? allCats.data.data.map(cat=>{
                             return (
                                 <option key={cat._id} value={cat._id}>{cat.name}</option>
                             )
@@ -85,7 +85,7 @@ const AdminAddProducts = () => {
                         
                     </select>
 
-                    <Multiselect
+                    {loadOption === false && loadSub ===false && options ?  <Multiselect
                         className="mt-2 text-end"
                         placeholder="التصنيف الفرعي"
                         options={options}
@@ -93,7 +93,7 @@ const AdminAddProducts = () => {
                         onRemove={onRemove}
                         displayValue="name"
                         style={{ color: "red" }}
-                    />
+                    />:null}
                     <select
                         name="brand"
                         id="brand"
@@ -102,7 +102,7 @@ const AdminAddProducts = () => {
                         className="select input-form-area mt-3 px-2 ">
                         <option value="0">الماركة</option>
                         {
-                          allBrand && allBrand.data ? allBrand.data.data.map(brand=>{
+                         loading ===false&& allBrand && allBrand.data ? allBrand.data.data.map(brand=>{
                             return (
                                 <option key={brand._id} value={brand._id}>{brand.name}</option>
                             )

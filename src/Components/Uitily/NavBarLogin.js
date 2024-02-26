@@ -3,7 +3,9 @@ import { Navbar, Container, FormControl, Nav } from 'react-bootstrap'
 import logo from '../../images/logo.png'
 import login from '../../images/login.png'
 import cart from '../../images/cart.png'
+import useSearchNav from '../../hook/search/useSearchNav'
 const NavBarLogin = () => {
+  const [search,handleSearch]= useSearchNav();
     return (
         <Navbar className="sticky-top" bg="dark" variant="dark" expand="sm">
             <Container>
@@ -16,6 +18,8 @@ const NavBarLogin = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <FormControl
                         type="search"
+                        value={search}
+                        onChange={handleSearch}
                         placeholder="ابحث..."
                         className="me-2 w-100 text-center"
                         aria-label="Search"

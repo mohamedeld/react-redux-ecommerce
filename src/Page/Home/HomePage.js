@@ -8,15 +8,15 @@ import BrandFeatured from '../../Components/Brand/BrandFeatured';
 import Footer from '../../Components/Uitily/Footer';
 import { useGetProducts } from '../../hook/product/useGetProduct';
 const HomePage = () => {
-  const [response ] = useGetProducts();
+  const [response,pageCount,getPage,isLoading ] = useGetProducts();
     return (
         <div className='font' style={{ minHeight: '670px' }}>
 
             <Silder />
             <HomeCategory />
-            <CardProductsContainer title="الاكثر مبيعا" btntitle="المزيد" pathText="/products" response = {response}/>
+            <CardProductsContainer title="الاكثر مبيعا" btntitle="المزيد" pathText="/products" response = {response} isLoading={isLoading}/>
             <DiscountSection />
-            <CardProductsContainer title="احدث الازياء" btntitle="المزيد" pathText="/products" response = {response}/>
+            <CardProductsContainer title="احدث الازياء" btntitle="المزيد" pathText="/products" response = {response} isLoading={isLoading}/>
             <BrandFeatured title="اشهر الماركات" btntitle="المزيد"  />
 
         </div>

@@ -23,11 +23,17 @@ export function useCreateProduct(){
   const [isLoading,setIsLoading] = useState(true);
   const [isActive,setIsActive] = useState(false);
   const [options,setOptions] = useState([]);
-
+  const [loading,setLoading] = useState(true);
+  const [loadOption,setLoadOption] = useState(true);
+  const [loadSub,setLoadSub] = useState(true);
+  async function handleFirst(){
+    setLoading(true);
+    await dispatch(allCategories());
+    await dispatch(getBrands());
+    setLoading(false);
+  }
   useEffect(()=>{
-    
-    dispatch(allCategories());
-    dispatch(getBrands());
+    handleFirst();
   },[])
 
 
@@ -37,7 +43,9 @@ export function useCreateProduct(){
     let selectedCategory = event.target.value;
     
     if(selectedCategory !== "0"){
+      setLoadSub(true);
       await dispatch(getSubCatByCategory(selectedCategory))
+      setLoadSub(false);
      }
      
      if(selectedCategory !== "0"){
@@ -50,16 +58,18 @@ export function useCreateProduct(){
   
      
   }
-  
+  const subCategories = useSelector(state=> state.allSubCategories.subCategory);
   useEffect(()=>{
     
     if(category !== "0"){
       if(subCategories.data){
+        setLoadOption(true);
         setOptions(subCategories.data.data);
+        setLoadOption(false);
       }
     }
-  },[category])
-  const subCategories = useSelector(state=> state.allSubCategories.subCategory);
+  },[category,subCategories])
+  
   const res = useSelector(state=> state.allProducts.products);
   useEffect(()=>{
     if(isLoading === false){
@@ -119,6 +129,7 @@ export function useCreateProduct(){
   function onRemove(selectedList){
     setSelectedSubCat(selectedList)
   }
+ 
   async function handleSubmit(event){
     event.preventDefault();
     if(!navigator.onLine){
@@ -179,5 +190,5 @@ export function useCreateProduct(){
     console.log(formData)
   }
   
-  return [images,setImages,name,handleName,description,handleDescription,priceBefore,handlePriceBefore,priceAfter,handlePriceAfter,category,handleCategory,brand,handleBrand,colors,handleColors,quantity,handleQuantity,allCats,allBrand,isActive,handleIsActive,removeColors,options,onSelect,onRemove,handleSubmit]
+  return [images,setImages,name,handleName,description,handleDescription,priceBefore,handlePriceBefore,priceAfter,handlePriceAfter,category,handleCategory,brand,handleBrand,colors,handleColors,quantity,handleQuantity,allCats,allBrand,isActive,handleIsActive,removeColors,options,onSelect,onRemove,handleSubmit,loading,loadOption,loadSub]
 }
