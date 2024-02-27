@@ -3,7 +3,7 @@ import { Row, Spinner } from 'react-bootstrap'
 import useSlider from '../../hook/search/useSlider'
 
 const SideFilter = () => {
-  const [categories,brands,handleCategory,handleBrand] = useSlider();
+  const [categories,brands,handleCategory,handleBrand,priceTo,priceFrom,handlePriceFrom,handlePriceTo] = useSlider();
  
   return (
     <div className="mt-3">
@@ -50,12 +50,16 @@ const SideFilter = () => {
           <input
             className="m-2 text-center"
             type="number"
+            value={priceFrom}
+            onChange={handlePriceFrom}
             style={{ width: "50px", height: "25px" }}
           />
         </div>
         <div className="d-flex">
           <p className="filter-sub my-2">الي:</p>
           <input
+          value={priceTo}
+          onChange={handlePriceTo}
             className="m-2 text-center"
             type="number"
             style={{ width: "50px", height: "25px" }}

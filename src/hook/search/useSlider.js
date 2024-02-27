@@ -10,7 +10,9 @@ export default function useSlider() {
   
   // const [loading,setLoading] = useState(true);
   const [categoryChecked,setCategoryChecked] = useState([]);
-  const [brandChecked,setBrandChecked] = useState('');
+  const [brandChecked,setBrandChecked] = useState([]);
+  const [priceFrom,setPriceFrom] = useState(0);
+  const [priceTo,setPriceTo] = useState(0);
   const [,,,,handleProd] = useGetProduct()
   async function handleFirst(){
   //  setLoading(true);
@@ -47,7 +49,7 @@ export default function useSlider() {
   useEffect(()=>{
     getQuery();
   },[categoryChecked])
-  
+  let queryBrand ="";
   function handleBrand(event){
     let val = event.target.value;
     if(val === "0"){
@@ -60,6 +62,16 @@ export default function useSlider() {
       }
     }
   }
+  function getQueryBrand(){
+    queryBrand = brandChecked.map(val=> "brand[in][]="+val).join("&")
+    localStorage.setItem("checkbrand",queryBrand);
+    setTimeout(()=>{
+      handleProd();
+    },1000) 
+  }
+  useEffect(()=>{
+    getQueryBrand();
+  },[brandChecked])
   let categories=[];
   try{
     if(allCats && allCats.data){
@@ -73,6 +85,20 @@ export default function useSlider() {
     }
   }catch(err){console.log(err.message)}
   
-  return [categories,brands,handleCategory,handleBrand];
+  function handlePriceTo(event){
+    localStorage.setItem("priceTo",event.target.value)
+    setPriceTo(event.target.value)
+  }
+  function handlePriceFrom(event){
+    localStorage.setItem("priceFrom",event.target.value)
+    setPriceFrom(event.target.value);
+  }
+  useEffect(()=>{
+    setTimeout(()=>{
+      handleProd();
+    },1000) 
+  },[priceFrom,priceTo])
+
+  return [categories,brands,handleCategory,handleBrand,priceTo,priceFrom,handlePriceFrom,handlePriceTo];
 }
 
