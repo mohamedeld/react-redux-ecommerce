@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col, Spinner } from 'react-bootstrap'
-import avatar from '../../images/avatar.png'
+// import avatar from '../../images/avatar.png'
 import { useCreateBrand } from '../../hook/brands/useCreateBrand'
 import { ToastContainer } from 'react-toastify'
 
