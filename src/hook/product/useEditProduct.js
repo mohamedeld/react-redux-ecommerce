@@ -4,7 +4,7 @@ import { getBrands } from '../../redux/actions/brands';
 import { allCategories } from '../../redux/actions/category';
 import { getSubCatByCategory } from '../../redux/actions/subCategory';
 import { toast } from 'react-toastify';
-import { createProduct, editProductById, getProductById } from '../../redux/actions/product';
+import {  editProductById, getProductById } from '../../redux/actions/product';
 import {dataURLtoFile} from '../../utils/convertImage';
 import { convertUrlToFile } from '../../utils/convertUrlToFile';
 
@@ -25,14 +25,14 @@ export function useEditProduct(id){
   const [isActive,setIsActive] = useState(false);
   const [options,setOptions] = useState([]);
   const [getCat,setGetCat] = useState(true);
+  async function run(){
+    setGetCat(true);
+    await dispatch(allCategories());
+    await dispatch(getBrands());
+    await dispatch(getProductById(id));
+    setGetCat(false);
+  }
   useEffect(()=>{
-    async function run(){
-      setGetCat(true);
-      await dispatch(allCategories());
-      await dispatch(getBrands());
-      await dispatch(getProductById(id));
-      setGetCat(false);
-    }
     run();
   },[])
 
@@ -41,15 +41,14 @@ export function useEditProduct(id){
   const allBrand = useSelector(state=> state.allBrands.brands)
   const product = useSelector(state=> state.allProducts.oneProduct);
   
-  
+  async function run2(){
+    await dispatch(getSubCatByCategory(category))
+  }
   useEffect(()=>{
     
     if(getCat === false){
       if(category !== "0"){
-        async function run(){
-          await dispatch(getSubCatByCategory(category))
-        }
-        run();
+        run2();
       }
     }
   },[category]);
@@ -61,7 +60,7 @@ export function useEditProduct(id){
     }
   },[subCategories])
   const res = useSelector(state=> state.allProducts.updateProducts);
-  console.log(res);
+  
   useEffect(()=>{
     if(isLoading === false){
       if(res){
@@ -83,8 +82,6 @@ export function useEditProduct(id){
       setCategory(product.data.data.category);
       setBrand(product.data.data.brand);
       setColors(product.data.data.availableColors)
-
-      
     }
   },[product])
   
@@ -195,7 +192,7 @@ export function useEditProduct(id){
     await dispatch(editProductById(id,formData));
     setIsLoading(false); 
    },1000)
-       }
+  }
   
   return [images,setImages,name,handleName,description,handleDescription,priceBefore,handlePriceBefore,priceAfter,handlePriceAfter,category,handleCategory,brand,handleBrand,colors,handleColors,quantity,handleQuantity,allCats,allBrand,isActive,handleIsActive,removeColors,options,onSelect,onRemove,handleSubmit,isLoading]
 }

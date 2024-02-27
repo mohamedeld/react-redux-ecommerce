@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
-import { useGetProducts } from "../product/useGetProduct";
+import { useGetProduct } from "../product/useGetProduct";
 
 export default function useSearchNav() {
-  const [search,setSearch] = useState(
-    function(){
-      const storedValue = localStorage.getItem("word");
-      return storedValue !== null ? storedValue : "";
-    }
-  );
-  const [response,pageCount,getPage,isLoading,handleProd] = useGetProducts();
+  const [search,setSearch] = useState('');
+  const [,,,,handleProd] = useGetProduct();
   function handleSearch(event){
     localStorage.setItem("word",event.target.value);
     setSearch(event.target.value);
@@ -20,5 +15,5 @@ export default function useSearchNav() {
     },1000)
   },[search])
 
-  return [search,handleSearch]
+  return [search,handleSearch];
 }

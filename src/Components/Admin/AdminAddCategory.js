@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { useCreateCategory } from '../../hook/category/useCreateCategory'
 const AdminAddCategory = () => {
+   
   const [img,name,changeImage,changeName,handleSubmit,isPress,isLoading] = useCreateCategory();
     return (
         <div>

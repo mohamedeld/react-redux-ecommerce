@@ -3,9 +3,9 @@ import { Container, Row, Col } from 'react-bootstrap'
 import AdminSideBar from '../../Components/Admin/AdminSideBar'
 import AdminAllProducts from '../../Components/Admin/AdminAllProducts'
 import Pagination from '../../Components/Uitily/Pagination'
-import { useGetProducts } from '../../hook/product/useGetProduct'
+import { useGetProduct } from '../../hook/product/useGetProduct'
 const AdminAllProductsPage = () => {
-  const [response,pageCount,getPage,isLoading] = useGetProducts();
+  const [response,pageCount,getPage,isLoading,handleProd] = useGetProduct();
     return (
         <Container >
             <Row className='py-3'>

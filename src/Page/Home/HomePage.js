@@ -6,9 +6,9 @@ import Silder from './../../Components/Home/Silder';
 import DiscountSection from './../../Components/Home/DiscountSection';
 import BrandFeatured from '../../Components/Brand/BrandFeatured';
 import Footer from '../../Components/Uitily/Footer';
-import { useGetProducts } from '../../hook/product/useGetProduct';
+import { useGetProduct } from '../../hook/product/useGetProduct';
 const HomePage = () => {
-  const [response,pageCount,getPage,isLoading ] = useGetProducts();
+  const [response,pageCount,getPage,isLoading,handleProd ] = useGetProduct();
     return (
         <div className='font' style={{ minHeight: '670px' }}>
 

@@ -5,17 +5,17 @@ import CardProductsContainer from '../../Components/Products/CardProductsContain
 import Pagination from '../../Components/Uitily/Pagination'
 import SearchCountResult from '../../Components/Uitily/SearchCountResult'
 import SideFilter from '../../Components/Uitily/SideFilter'
-import { useGetProducts } from '../../hook/product/useGetProduct'
+import { useGetProduct } from '../../hook/product/useGetProduct'
 
 const ShopProductsPage = () => {
-  const [response, pageCount, getPage,isLoading] = useGetProducts();
+  const [response, pageCount, getPage,isLoading,handleProd] = useGetProduct();
  
    
   return (
     <div style={{ minHeight: '670px' }}>
       <CategoryHeader />
       <Container>
-        <SearchCountResult title={ isLoading === false && response && response.data.data.length > 0  ? `نتيجة بحث ${response.data.data.length}`:`نتيجة بحث 0`} />
+        <SearchCountResult onClick={handleProd} title={ isLoading === false && response && response.data.data.length > 0  ? `نتيجة بحث ${response.data.data.length}`:`نتيجة بحث 0`} />
         <Row className='d-flex flex-row'>
           <Col sm="2" xs="2" md="1" className='d-flex'>
             <SideFilter />
