@@ -47,9 +47,13 @@ export default function useUpdatePassword() {
       toast.warn("password does not confirmed");
       return;
     }
-
+    let email="";
+    if(localStorage.getItem("emailuser")!==null){
+      email = localStorage.getItem("emailuser");
+    }
     setLoading(true);
     await dispatch(updatePassword({
+      email,
       password,
     }))
     setLoading(false);

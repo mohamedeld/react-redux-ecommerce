@@ -55,10 +55,13 @@ const NavBarLogin = () => {
             {
               loading ===false && user ? 
               <NavDropdown className="nav-text d-flex mt-3 justify-content-center" title={user.name} id="basic-nav-dropdown">
-             
+             {
+              user.role.toLowerCase() === "admin"?<NavDropdown.Item href="/admin/allproducts">
+              لوحة التحكم
+            </NavDropdown.Item> :
               <NavDropdown.Item href="/user/profile">
-                Another action
-              </NavDropdown.Item>
+                الصفحة الشخصية
+              </NavDropdown.Item>}
               
               <NavDropdown.Item  onClick={logout}>
               

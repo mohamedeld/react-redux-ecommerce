@@ -10,6 +10,7 @@ export default function useForgetPassword() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(true);
   function handleEmail(event) {
+    
     setEmail(event.target.value);
   }
   const res = useSelector(state => state.allAuths.forgetPasswords);
@@ -39,7 +40,7 @@ export default function useForgetPassword() {
     if (email === "") {
       toast.error("please enter your email");
     }
-
+    localStorage.setItem("emailuser",email);
     setLoading(true);
     await dispatch(forgetPassword({ email }));
     setLoading(false);
