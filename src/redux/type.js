@@ -17,3 +17,7 @@ export const DELETE_PRODUCT_BY_ID = "DELETE_PRODUCT_BY_ID";
 export const UPDATE_PRODUCT_BY_ID = "UPDATE_PRODUCT_BY_ID";
 export const REGISTER = "REGISTER";
 export const LOGIN = "LOGIN";
+export const GET_ME = "GET_ME";
+export const FORGET_PASSWORD = "FORGET_PASSWORD";
+export const RSEND_CODE = "RSEND_CODE";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";

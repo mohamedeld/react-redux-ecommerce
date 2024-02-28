@@ -38,14 +38,20 @@ export default function userLogin() {
       if(response){
         if(response.data.token){
           localStorage.setItem("token",response.data.token);
+          localStorage.setItem("user",JSON.stringify(response.data.data));
           toast.success("login successfully");
           setEmail("");
           setPassword("");
           setTimeout(()=>{
             navigate("/")
           })
+        }else{
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
         }
         if(response.status === 500){
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
           toast.error("Incorrect email or password")
         }
       }
