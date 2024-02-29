@@ -11,10 +11,10 @@ export async function useEditData(url,data){
 }
 
 export async function useEditDataWithoutImage(url,data){
-  const response = await baseURL.patch(url,data,{
+  const response = await baseURL.put(url,data,{
     headers:{
       'Content-Type':'application/json',
-      'Authorization':`Bearer ${localStorage.getItem('token')}`
+      Authorization:`Bearer ${localStorage.getItem('token')}`
     }
   });
   return response;

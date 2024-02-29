@@ -1,35 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import rate from '../../images/rate.png'
 import deleteImg from '../../images/delete.png';
 import editImg from "../../images/edit-image.png"
 import useModal from '../../utils/useModal';
 import Modals from '../../utils/Modals';
-import { useDispatch } from 'react-redux';
-import { DELETE_REVIEW } from '../../redux/type';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteReview } from '../../redux/actions/review';
+import { toast } from 'react-toastify';
+import useDeleteReview from '../../hook/review/useDeleteReview';
+import UpdateModal from '../../utils/UpdateModal';
+import useUpdateReview from '../../hook/review/useUpdateReview';
+import useEditModal from '../../utils/useEditModal';
 const RateItem = ({name,rateText,rateValue,user,id}) => {
-  const dispatch = useDispatch();
-  const [loading,setLoading] = useState(true);
-  const [show,handleClose,handleShow] = useModal();
-  let loggedUser="";
-  if(localStorage.getItem("user") !== null){
-    loggedUser = JSON.parse(localStorage.getItem("user"));
-  }
   
-  async function handleDelete(){
+  const [isUser,handleDelete,show,handleClose,handleShow] = useDeleteReview(user,id);
+    const [showEdit,handleCloseEdit,handleShowEdit] = useEditModal();
+    const [review,editLoading,handleEditSubmit,handleSetRating,handleNewRateValue,rateStar,newRateValue] = useUpdateReview(id)
     
-    setLoading(true);
-    await dispatch(DELETE_REVIEW(id));
-     setLoading(false);
-   handleClose();
-  }
-  function handleEdit(){
-
-  }
-  
+    
     return (
         <div>
           <Modals handleDelete={handleDelete} show={show} handleClose={handleClose}/>
+          <UpdateModal editLoading={editLoading} handle showEdit={showEdit} handleEditSubmit={handleEditSubmit} handleCloseEdit={handleCloseEdit} handleNewRateValue={handleNewRateValue} rateStar={rateStar} newRateValue={newRateValue} handleSetRating={handleSetRating}/>
             <Row className="mt-3">
                 <Col className="d-felx me-5">
                     <div className="rate-name  d-inline ms-2">{name}</div>
@@ -42,10 +35,10 @@ const RateItem = ({name,rateText,rateValue,user,id}) => {
                     <div className="rate-description  d-inline ms-2">
                         {rateText}
                     </div>
-                   {user && loggedUser ? user._id === loggedUser._id? <div>
+                   {isUser? <div>
                       <img src={deleteImg}  alt="icon for delete image" onClick={handleShow} width="20px" height={"20px"} style={{cursor:'pointer'}}/>
-                      <img src={editImg}  alt="icon for update image" onClick={()=>handleEdit()} width="20px" height={"20px"} style={{cursor:'pointer'}}/>
-                    </div>: null : null}
+                      <img src={editImg}  alt="icon for update image" onClick={handleShowEdit} width="20px" height={"20px"} style={{cursor:'pointer'}}/>
+                    </div>: null }
                 </Col>
             </Row>
         </div>

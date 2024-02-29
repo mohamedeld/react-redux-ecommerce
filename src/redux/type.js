@@ -24,3 +24,5 @@ export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 export const ADD_REVIEW = "ADD_REVIEW";
 export const GET_REVIEW = "GET_REVIEW";
 export const DELETE_REVIEW = "DELETE_REVIEW";
+export const GET_REVIEW_BY_ID = "GET_REVIEW_BY_ID";
+export const UPDATE_REVIEW_BY_ID = "UPDATE_REVIEW_BY_ID";
