@@ -5,12 +5,12 @@ export async function useGetData(url,params){
   const response = await baseURL.get(url,params);
   return response;
 }
-export async function useGetLoggedUser(url){
+export async function useGetLoggedUser(url,params){
   const config = {
     headers:{
-      'Authorization':`Bearer ${localStorage.getItem("token")}`
+      Authorization:`Bearer ${localStorage.getItem("token")}`
     }
   }
-  const response = await baseURL.get(url,config);
+  const response = await baseURL.get(url,params,config);
   return response;
 }

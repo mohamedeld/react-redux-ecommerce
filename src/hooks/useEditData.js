@@ -7,7 +7,7 @@ export async function useEditData(url,data){
       'Authorization':`Bearer ${localStorage.getItem('token')}`
     }
   })
-  return response;
+  return response; 
 }
 
 export async function useEditDataWithoutImage(url,data){

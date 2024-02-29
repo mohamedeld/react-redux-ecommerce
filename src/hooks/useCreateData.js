@@ -14,7 +14,7 @@ export async function useCreateDataWithoutImage(url,data){
   const response = await baseURL.post(url,data,{
     headers:{
       'Content-Type':'application/json',
-      'Authorization':`Bearer ${localStorage.getItem('token')}`
+        Authorization:`Bearer ${localStorage.getItem('token')}`
     }
   })
   return response;

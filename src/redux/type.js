@@ -21,3 +21,6 @@ export const GET_ME = "GET_ME";
 export const FORGET_PASSWORD = "FORGET_PASSWORD";
 export const RSEND_CODE = "RSEND_CODE";
 export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
+export const ADD_REVIEW = "ADD_REVIEW";
+export const GET_REVIEW = "GET_REVIEW";
+export const DELETE_REVIEW = "DELETE_REVIEW";

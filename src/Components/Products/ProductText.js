@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 const ProductText = () => {
   const dispatch = useDispatch();
   const {id} = useParams();
-  const [item,cat,brand] = useGetSpecificProduct(id);
+  const [item,cat,brand,productsLike,loading] = useGetSpecificProduct(id);
   
     return (
         <div>

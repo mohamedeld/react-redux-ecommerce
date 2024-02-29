@@ -1,9 +1,14 @@
 import React from 'react'
 import { Col,Row } from 'react-bootstrap';
 import ReactStars from "react-rating-stars-component";
+import useAddReview from '../../hook/review/useAddReview';
+import { useParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const RatePost = () => {
-
+  const {id} = useParams();
+  const [rateText,handleRateText,rateValue,handleRateValue,user,handleSubmit] = useAddReview(id);
+  
     const setting = {
         size: 20,
         count: 5,
@@ -16,14 +21,16 @@ const RatePost = () => {
         halfIcon: <i className="fa fa-star-half-alt" />,
         filledIcon: <i className="fa fa-star" />,
         onChange: newValue => {
-            console.log(`Example 2: new value is ${newValue}`);
+            handleRateValue(newValue);
         }
     };
     return (
         <div>
+        <ToastContainer/>
         <Row className="mt-3 ">
+        
           <Col sm="12" className="me-5  d-flex">
-            <div className="rate-name  d-inline ms-3 mt-1 ">علي محمد</div>
+            <div className="rate-name  d-inline ms-3 mt-1 ">{user? user.name : 'المستخدم'}</div>
             <ReactStars {...setting} />
           </Col>
         </Row>
@@ -34,9 +41,11 @@ const RatePost = () => {
               rows="2"
               cols="20"
               placeholder="اكتب تعليقك...."
+              value={rateText}
+              onChange={handleRateText}
             />
             <div className=" d-flex justify-content-end al">
-              <div className="product-cart-add px-3  py-2 text-center d-inline">اضف تعليق</div>
+              <div className="product-cart-add px-3  py-2 text-center d-inline" onClick={handleSubmit}>اضف تعليق</div>
             </div>
           </Col>
         </Row>

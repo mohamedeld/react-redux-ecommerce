@@ -8,13 +8,14 @@ import { resolvePath, useParams } from 'react-router-dom';
 import useGetSpecificProduct from '../../hook/product/useGetSpecificProduct';
 const ProductGallery = () => {
   const {id} = useParams();
-  const [responseData] = useGetSpecificProduct(id);
+  const [item,cat,brand,productsLike,loading] = useGetSpecificProduct(id);
   let images =[];
-  if(responseData && responseData.data  ){
-    images = responseData.data.data.images.map((img)=>({original:img}));
+  if(loading === false && item  ){
+    images = item.images.map((img)=>({original:img}));
   }else{
     images = [{original:`${mobile}`}]
   }
+
     return (
         <div className="product-gallary-card d-flex justfiy-content-center  align-items-center
         pt-2">

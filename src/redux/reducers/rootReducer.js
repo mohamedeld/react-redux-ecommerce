@@ -4,13 +4,15 @@ import { brandReducer } from "./brand";
 import { subCategoryReducer } from "./subCategory";
 import { productReducer } from "./product";
 import AuthReducer from "./register";
+import { reviewReducer } from "./review";
 
 const rootReducer = combineReducers({
   allCategories:allCategories,
   allBrands:brandReducer,
   allSubCategories:subCategoryReducer,
   allProducts:productReducer,
-  allAuths:AuthReducer
+  allAuths:AuthReducer,
+  allReviews:reviewReducer
 });
 
 export default rootReducer;
