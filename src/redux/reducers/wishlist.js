@@ -1,8 +1,9 @@
-import { ADD_TO_WHISTLIST, DELETE_FROM_WHISTLIST } from "../type";
+import { ADD_TO_WHISTLIST, DELETE_FROM_WHISTLIST, GET_ALL_WISHLIST } from "../type";
 
 const initialState = {
   addWhistList: [],
-  deleteFromWishList: []
+  deleteFromWishList: [],
+  allWishlists:[]
 }
 
 export function whistListReducer(state = initialState, action) {
@@ -16,6 +17,11 @@ export function whistListReducer(state = initialState, action) {
       return {
         ...state,
         deleteFromWishList: action.payload
+      }
+    case GET_ALL_WISHLIST:
+      return {
+        ...state,
+        allWishlists:action.payload
       }
     default:
       return state;

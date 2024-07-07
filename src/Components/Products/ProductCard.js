@@ -9,51 +9,61 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductToWhishlist, removeProductFromWhishlist } from '../../redux/actions/wishlist';
 import { ToastContainer, toast } from 'react-toastify';
-const ProductCard = ({ productName, productPrice, productImgCover, rating, id }) => {
+const ProductCard = ({ productName, productPrice, productImgCover, rating, id,favouriteProducts }) => {
   const dispatch = useDispatch();
-  const [favImg, setFavImg] = useState(favoff);
-  const [isFav, setIsFav] = useState(false);
+  const [favImg, setFavImg] = useState('');
+  let isFav =favouriteProducts?.some(prod => prod === id)
+  const [fav,setFav] = useState(isFav);
   function handleIsFav() {
-    setIsFav(!isFav);
+    if(isFav){
+      handleDelete();
+    }else{
+      handleSubmit();
+    }
   }
   
   const res = useSelector(state => state.allWhistlist.addWhistList);
   const response = useSelector(state=> state?.allWhistlist?.deleteFromWishList)
   async function handleSubmit() {
     try{
+
       await dispatch(addProductToWhishlist({
         productId:id
       }));
+      if(res && res?.status === 200){
         toast.success("item added successfully to wishlist");
-        setFavImg(favon);
-      
-    }catch(error){
+      }
+      setFav(true);
+        }catch(error){
       console.log(error)
+      toast.error(error?.message)
       toast.error(error?.response?.data?.message);
       
     }
   }
   const handleDelete = async()=>{
     try{  
+
       await dispatch(removeProductFromWhishlist(id))
-      if(response?.status === 200){
+      if(response && response?.status === 200){
         toast.success("product removed from whishlist");
-        setFavImg(favoff);
       }
-    }catch(error){
+      setFav(false);   
+     }catch(error){
       console.log(error);
       toast.error(error?.message);
       toast.error(error?.response?.data?.message);
     }
   }
   useEffect(() => {
-    if (isFav === false) {
-      handleDelete();
+    if (isFav) {
+      setFavImg(favon);
     } else {
-      handleSubmit();
+      setFavImg(favoff);
+      // handleSubmit();
     }
-  }, [isFav]);
-  
+  }, [fav,isFav]);
+ 
   // const response = useSelector(state=> state.allWhistlist.deleteFromWishList);
 
   // async function handleDelete(){
