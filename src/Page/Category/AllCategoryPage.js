@@ -1,4 +1,4 @@
-
+import React from "react";
 import CategoryContainer from '../../Components/Category/CategoryContainer'
 import Pagination from '../../Components/Uitily/Pagination'
 import { useGetAllCategories } from '../../hook/category/useGetAllCategories';

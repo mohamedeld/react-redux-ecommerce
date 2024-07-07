@@ -25,6 +25,7 @@ const NavBarLogin = () => {
     if(res){
       if(res.data){
         setUser(res.data.data);
+        // window.location.reload(false)
       }
     }
   },[res]);
@@ -54,6 +55,7 @@ const NavBarLogin = () => {
           <Nav className="me-auto">
             {
               loading ===false && user ? 
+              
               <NavDropdown className="nav-text d-flex mt-3 justify-content-center" title={user.name} id="basic-nav-dropdown">
              {
               user.role.toLowerCase() === "admin"?<NavDropdown.Item href="/admin/allproducts">

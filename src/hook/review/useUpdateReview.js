@@ -62,7 +62,15 @@ export default function useUpdateReview(id) {
   useEffect(()=>{
     if(newLoading === false){
       if(response){
-        console.log(response);
+        if(response.status && response.status == 201){
+          toast.success("تم التعديل بنجاح")
+          setTimeout(()=>{
+            window.location.reload(false);
+          },1000);
+        }else{
+          toast.error("something went wrong");
+          return;
+        }
       }
     }
   },[newLoading])

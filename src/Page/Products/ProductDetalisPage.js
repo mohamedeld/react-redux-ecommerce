@@ -33,7 +33,6 @@ const ProductDetalisPage = () => {
   }catch(err){
     console.log(err);
   }
-  
     return (
         <div style={{ minHeight: '670px' }}>
             <CategoryHeader />
