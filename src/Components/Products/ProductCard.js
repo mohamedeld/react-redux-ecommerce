@@ -9,61 +9,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductToWhishlist, removeProductFromWhishlist } from '../../redux/actions/wishlist';
 import { ToastContainer, toast } from 'react-toastify';
+import useWishList from '../../hook/wishlist/useWishList';
 const ProductCard = ({ productName, productPrice, productImgCover, rating, id,favouriteProducts }) => {
-  const dispatch = useDispatch();
-  const [favImg, setFavImg] = useState('');
-  let isFav =favouriteProducts?.some(prod => prod === id)
-  const [fav,setFav] = useState(isFav);
-  function handleIsFav() {
-    if(isFav){
-      handleDelete();
-    }else{
-      handleSubmit();
-    }
-  }
-  
-  const res = useSelector(state => state.allWhistlist.addWhistList);
-  const response = useSelector(state=> state?.allWhistlist?.deleteFromWishList)
-  async function handleSubmit() {
-    try{
-
-      await dispatch(addProductToWhishlist({
-        productId:id
-      }));
-      if(res && res?.status === 200){
-        toast.success("item added successfully to wishlist");
-      }
-      setFav(true);
-        }catch(error){
-      console.log(error)
-      toast.error(error?.message)
-      toast.error(error?.response?.data?.message);
-      
-    }
-  }
-  const handleDelete = async()=>{
-    try{  
-
-      await dispatch(removeProductFromWhishlist(id))
-      if(response && response?.status === 200){
-        toast.success("product removed from whishlist");
-      }
-      setFav(false);   
-     }catch(error){
-      console.log(error);
-      toast.error(error?.message);
-      toast.error(error?.response?.data?.message);
-    }
-  }
-  useEffect(() => {
-    if (isFav) {
-      setFavImg(favon);
-    } else {
-      setFavImg(favoff);
-      // handleSubmit();
-    }
-  }, [fav,isFav]);
- 
+    const [handleIsFav,favImg] = useWishList(id,favouriteProducts)
   // const response = useSelector(state=> state.allWhistlist.deleteFromWishList);
 
   // async function handleDelete(){
